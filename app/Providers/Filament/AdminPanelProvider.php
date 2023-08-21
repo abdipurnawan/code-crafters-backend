@@ -60,48 +60,7 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->plugins([
-                SkyPlugin::make()
-                    ->skyPrefix('sky')
-                    ->skyMiddleware(['web'])
-                    ->uriPrefix([
-                        'post' => 'post',
-                        'page' => 'page',
-                        'library' => 'library',
-                        'faq' => 'faq',
-                    ])
-
-                    // enable or disable the resources
-                    // ->hasPostResource()
-                    // ->hasPageResource()
-                    // ->hasFaqResource()
-                    // ->hasLibraryResource(false)
-
-                    ->navigationGroupLabel('Menus')
-
-                    // the default models
-                    ->faqModel(\LaraZeus\Sky\Models\Faq::class)
-                    ->postModel(\LaraZeus\Sky\Models\Post::class)
-                    ->postStatusModel(\LaraZeus\Sky\Models\PostStatus::class)
-                    ->tagModel(\LaraZeus\Sky\Models\Tag::class)
-                    ->libraryModel(\LaraZeus\Sky\Models\Library::class)
-
-                    ->editor(TipTapEditor::class)
-                    ->parsers([\LaraZeus\Sky\Classes\BoltParser::class])
-                    ->recentPostsLimit(5)
-                    ->searchResultHighlightCssClass('highlight')
-                    ->skipHighlightingTerms(['iframe'])
-                    ->defaultFeaturedImage('url/to/image')
-                    ->libraryTypes([
-                        'FILE' => 'File',
-                        'IMAGE' => 'Image',
-                        'VIDEO' => 'Video',
-                    ])
-                    ->tagTypes([
-                        'tag' => 'Tag',
-                        'category' => 'Category',
-                        'library' => 'Library',
-                        'faq' => 'Faq',
-                    ]),
+                SkyPlugin::make(),
                 SpatieLaravelTranslatablePlugin::make()
                     ->defaultLocales(['en', 'es', 'fr']),
 
