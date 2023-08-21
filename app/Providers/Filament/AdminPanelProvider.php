@@ -18,6 +18,8 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use LaraZeus\Sky\Editors\MarkdownEditor;
+use LaraZeus\Sky\Editors\TinyEditor;
 use LaraZeus\Sky\Editors\TipTapEditor;
 use LaraZeus\Sky\SkyPlugin;
 use Spatie\Translatable\Translatable;
@@ -60,7 +62,8 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->plugins([
-                SkyPlugin::make(),
+                SkyPlugin::make()
+                ->editor(TinyEditor::class),
                 SpatieLaravelTranslatablePlugin::make()
                     ->defaultLocales(['en', 'es', 'fr']),
 
