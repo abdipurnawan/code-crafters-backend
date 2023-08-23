@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\SettingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +17,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+
+// Blogs
+Route::get('blogs', [BlogController::class, 'getAllBlogs']);
+Route::get('blogs/{slug}', [BlogController::class, 'findBlogBySlug']);
+
+// Services
+Route::get('services', [ServiceController::class, 'getAllServices']);
+
+// Setting
+Route::get('settings', [SettingController::class, 'getAllSettings']);
