@@ -67,7 +67,7 @@ class AdminPanelProvider extends PanelProvider
                     ->navigationGroupLabel('Menus')
                     ->editor(TinyEditor::class),
                 SpatieLaravelTranslatablePlugin::make()
-                    ->defaultLocales(['en', 'es', 'fr']),
+                    ->defaultLocales(['id']),
             ]);
     }
 }
