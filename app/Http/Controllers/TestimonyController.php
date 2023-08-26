@@ -12,6 +12,7 @@ class TestimonyController extends Controller
         $testimonies = Testimony::where('is_active', 1)->get([
             'id',
             'name',
+            'image',
             'testimony',
         ]);
 

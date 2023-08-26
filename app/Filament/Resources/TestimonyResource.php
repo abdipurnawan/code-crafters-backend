@@ -6,6 +6,7 @@ use App\Filament\Resources\TestimonyResource\Pages;
 use App\Filament\Resources\TestimonyResource\RelationManagers;
 use App\Models\Testimony;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Textarea;
@@ -58,6 +59,17 @@ class TestimonyResource extends Resource
                             ])
                             ->default(1)
                             ->required(),
+                        FileUpload::make('image')
+                            ->image()
+                            ->disk('public')
+                            ->directory('testimonies')
+                            ->visibility('public')
+                            ->imageEditor()
+                            ->imageEditorAspectRatios([
+                                '16:9',
+                                '4:3',
+                                '1:1',
+                            ])
                     ])
             ]);
     }
