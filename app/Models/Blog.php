@@ -20,4 +20,9 @@ class Blog extends Model
     {
         return $this->hasOne(Media::class, 'model_id', 'id')->where('model_type', 'LaraZeus\Sky\Models\Post');
     }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'taggables', 'taggable_id', 'tag_id');
+    }
 }

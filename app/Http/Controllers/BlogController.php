@@ -17,13 +17,26 @@ class BlogController extends Controller
      */
     public function getAllBlogs(Request $request)
     {
-        $blogs = Blog::query()
-            ->with('thumbnail')
+        $blogs = Blog::query();
+
+        // search filter
+        if (isset($request->search)) {
+            $blogs->where('title', 'like', '%' . $request->search . '%');
+        }
+
+        // tags filter
+        if (isset($request->tag_id)) {
+            $blogs->whereHas('tags', function ($query) use ($request) {
+                $query->where('tag_id', $request->tag_id);
+            });
+        }
+
+        $blogs = $blogs->with('thumbnail')
             ->where('post_type', 'post')
             ->where('status', 'publish')
             ->where('published_at', '<=', now())
             ->orderBy('created_at', 'desc')
-            ->paginate(10)
+            ->paginate($request->per_page ?? 6)
             ->through(function ($blog) {
                 return $this->clearJsonInBlog($blog);
             });
@@ -80,7 +93,7 @@ class BlogController extends Controller
 
     private function clearJsonInBlog($blog)
     {
-        // decode json
+        // decode blog json
         $title = json_decode($blog->title)->id;
         $description = json_decode($blog->description)->id;
         $content = json_decode($blog->content)->id;
