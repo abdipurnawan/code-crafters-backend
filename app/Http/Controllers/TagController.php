@@ -22,8 +22,8 @@ class TagController extends Controller
     private function clearJsonInBlog($tag)
     {
         // decode json
-        $name = json_decode($tag->name)->id;
-        $slug = json_decode($tag->slug)->id;
+        $name = json_decode($tag->name)->en;
+        $slug = json_decode($tag->slug)->en;
 
         // set value
         $tag->name = $name;
