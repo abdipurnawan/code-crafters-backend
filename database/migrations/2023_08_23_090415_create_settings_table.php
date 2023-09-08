@@ -37,6 +37,12 @@ return new class extends Migration
             'label' => 'Site Description',
             'value' => 'CodeCrafters adalah Software House, lahir untuk mengubah ide menjadi aplikasi berkualitas, dan memanfaatkan kode untuk perubahan positif. Bersama-sama, mari ciptakan masa depan yang lebih baik melalui seni kode.'
         ]);
+
+        Setting::create([
+            'key' => 'ga_tracking_id',
+            'label' => 'GA Tracking ID',
+            'value' => 'UA-XXXXX-Y'
+        ]);
     }
 
     /**
