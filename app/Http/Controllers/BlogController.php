@@ -35,11 +35,20 @@ class BlogController extends Controller
             ->where('post_type', 'post')
             ->where('status', 'publish')
             ->where('published_at', '<=', now())
-            ->orderBy('created_at', 'desc')
-            ->paginate($request->per_page ?? 6)
-            ->through(function ($blog) {
-                return $this->clearJsonInBlog($blog);
-            });
+            ->orderBy('created_at', 'desc');
+
+        // check is paginate or not
+        if (isset($request->is_paginated) && $request->is_paginated == 1) {
+            $blogs = $blogs->paginate($request->per_page ?? 6)
+                ->through(function ($blog) {
+                    return $this->clearJsonInBlog($blog);
+                });
+        } else {
+            $blogs = $blogs->get()
+                ->map(function ($blog) {
+                    return $this->clearJsonInBlog($blog);
+                });
+        }
 
         return $this->successResponse(
             'Successfully retrieved all blogs.',
